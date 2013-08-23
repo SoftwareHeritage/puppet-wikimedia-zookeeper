@@ -5,9 +5,10 @@ class zookeeper::defaults {
 
     $data_dir         = '/var/lib/zookeeper'
     $data_log_dir     = undef
-    $log_file         = '/var/log/zookeeper/zookeeper.log'
     $jmx_port         = 9998
-
+    $cleanup_count    = 10
+    $cleanup_script   = '/usr/share/zookeeper/bin/zkCleanup.sh'
+    
     # Default puppet paths to template config files.
     # This allows us to use custom template config files
     # if we want to override more settings than this
