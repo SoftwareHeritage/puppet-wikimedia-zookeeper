@@ -1,0 +1,7 @@
+Code-Review+2: Ottomata <otto@wikimedia.org>
+Verified+2: jenkins-bot
+Submitted-by: Ottomata <otto@wikimedia.org>
+Submitted-at: Fri, 22 May 2015 13:53:23 +0000
+Reviewed-on: https://gerrit.wikimedia.org/r/212746
+Project: operations/puppet/zookeeper
+Branch: refs/heads/master
