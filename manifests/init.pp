@@ -47,6 +47,7 @@ class zookeeper(
     $hosts         = $::zookeeper::defaults::hosts,
     $data_dir      = $::zookeeper::defaults::data_dir,
     $data_log_dir  = $::zookeeper::defaults::data_log_dir,
+    $max_conns     = $::zookeeper::defaults::max_conns,
     $tick_time     = $::zookeeper::defaults::tick_time,
     $init_limit    = $::zookeeper::defaults::init_limit,
     $sync_limit    = $::zookeeper::defaults::sync_limit,
