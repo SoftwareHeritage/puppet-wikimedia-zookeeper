@@ -10,13 +10,20 @@
 # $cleanup_count       - If this is > 0, this installs a cron to cleanup transaction
 #                        and snapshot logs.  zkCleanup.sh - $cleanup_count will be run daily.
 #                        Default: 10
-#
+# $cleanup_script      - Full path of the cleanup script to execute.
+#                        Default: /usr/share/zookeeper/bin/zkCleanup.sh
+#                        If defined it installs a daily cron.
+#                        Default: '/usr/share/zookeeper/bin/zkCleanup.sh'
+# $cleanup_script_args - Arguments to pass to the script (or the shell)
+#                        Default: '-n 10 > /dev/null'
+
 class zookeeper::server(
-    $jmx_port         = $::zookeeper::defaults::jmx_port,
-    $cleanup_count    = $::zookeeper::defaults::cleanup_count,
-    $cleanup_script   = $::zookeeper::defaults::cleanup_script,
-    $default_template = $::zookeeper::defaults::default_template,
-    $log4j_template   = $::zookeeper::defaults::log4j_template
+    $jmx_port            = $::zookeeper::defaults::jmx_port,
+    $cleanup_count       = $::zookeeper::defaults::cleanup_count,
+    $cleanup_script      = $::zookeeper::defaults::cleanup_script,
+    $cleanup_script_args = $::zookeeper::defaults::cleanup_script_args,
+    $default_template    = $::zookeeper::defaults::default_template,
+    $log4j_template      = $::zookeeper::defaults::log4j_template
 )
 {
     # need zookeeper common package and config.
@@ -70,15 +77,19 @@ class zookeeper::server(
     }
 
     cron { 'zookeeper-cleanup':
-        command => "${cleanup_script} -n ${cleanup_count} >/dev/null",
+        command => "${cleanup_script} ${cleanup_script_args}",
         minute  => 10,
         hour    => 0,
         user    => 'zookeeper',
         require => Service['zookeeper'],
     }
 
-    # if !$cleanup_count, then ensure this cron is absent.
-    if (!$cleanup_count or $cleanup_count <= 0) {
-        Cron['zookeeper-cleanup'] { ensure => 'absent' }
+    $cleanup_cron_ensure = cleanup_script ? {
+        undef   => false,
+        default => true
+    }
+
+    if (cleanup_script) {
+        Cron['zookeeper-cleanup'] { ensure => $cleanup_cron_ensure}
     }
 }
