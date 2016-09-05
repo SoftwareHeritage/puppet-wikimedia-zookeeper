@@ -1,0 +1,8 @@
+Verified+2: jenkins-bot
+Code-Review+1: Ottomata <otto@wikimedia.org>
+Code-Review+2: Elukey <ltoscano@wikimedia.org>
+Submitted-by: Elukey <ltoscano@wikimedia.org>
+Submitted-at: Mon, 05 Sep 2016 06:51:35 +0000
+Reviewed-on: https://gerrit.wikimedia.org/r/308173
+Project: operations/puppet/zookeeper
+Branch: refs/heads/master
