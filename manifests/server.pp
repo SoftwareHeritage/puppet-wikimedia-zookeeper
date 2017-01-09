@@ -79,11 +79,11 @@ class zookeeper::server(
     }
 
     cron { 'zookeeper-cleanup':
+        ensure  => $cleanup_cron_ensure,
         command => "${cleanup_script} ${cleanup_script_args}",
         minute  => 10,
         hour    => 0,
         user    => 'zookeeper',
-        ensure  => $cleanup_cron_ensure,
         require => Service['zookeeper'],
     }
 }
