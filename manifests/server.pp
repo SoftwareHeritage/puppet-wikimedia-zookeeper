@@ -6,6 +6,7 @@
 #
 # == Parameters
 # $jmx_port            - JMX port.    Set this to false if you don't want to expose JMX.
+# $java_opts           - JAVA_OPTS optional argument to pass to the JVM.
 # $cleanup_script      - Full path of the cleanup script to execute.
 #                        Default: /usr/share/zookeeper/bin/zkCleanup.sh
 # $cleanup_script_args - Arguments to pass to the script (or the shell)
@@ -16,6 +17,7 @@
 
 class zookeeper::server(
     $jmx_port            = $::zookeeper::defaults::jmx_port,
+    $java_opts           = $::zookeeper::defaults::java_opts,
     $cleanup_script      = $::zookeeper::defaults::cleanup_script,
     $cleanup_script_args = $::zookeeper::defaults::cleanup_script_args,
     $cleanup_cron_deploy = $::zookeeper::defaults::cleanup_cron_deploy,

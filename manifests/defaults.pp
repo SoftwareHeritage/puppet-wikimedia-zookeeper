@@ -6,6 +6,7 @@ class zookeeper::defaults {
     $data_dir            = '/var/lib/zookeeper'
     $data_log_dir        = undef
     $jmx_port            = 9998
+    $java_opts           = undef
     $cleanup_script      = '/usr/share/zookeeper/bin/zkCleanup.sh'
     $cleanup_script_args = '-n 10 > /dev/null'
     $cleanup_cron_deploy = true
